@@ -1,0 +1,252 @@
+/* ===== Reset básico ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #0f172a;
+    color: #e5e7eb;
+}
+
+/* ===== Cores principais ===== */
+:root {
+    --primary: #1e293b;
+    --accent: #22c55e;
+    --accent2: #38bdf8;
+}
+
+/* ===== Header ===== */
+header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    background: #020617;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 40px;
+    z-index: 1000;
+}
+
+.logo {
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--accent2);
+}
+
+nav a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #cbd5f1;
+    transition: .3s;
+}
+
+nav a:hover {
+    color: var(--accent2);
+}
+
+/* ===== Botão hambúrguer ===== */
+.hamburger {
+    display: none;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+/* ===== Hero ===== */
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    background: linear-gradient(135deg, #020617, #0f172a);
+}
+
+.hero h1 {
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    opacity: 0.8;
+    margin-bottom: 25px;
+}
+
+/* ===== Botões ===== */
+.btn {
+    background: var(--accent);
+    color: black;
+    padding: 12px 22px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: .3s;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    filter: brightness(1.1);
+}
+
+.btn-outline {
+    border: 2px solid var(--accent2);
+    padding: 10px 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--accent2);
+}
+
+.small {
+    font-size: 14px;
+}
+
+/* ===== Seções ===== */
+.section {
+    padding: 110px 40px 80px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+.section h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 30px;
+}
+
+.dark {
+    background: var(--primary);
+    border-radius: 16px;
+}
+
+/* ===== Grid ===== */
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+/* ===== Cards ===== */
+.card {
+    background: #020617;
+    padding: 25px;
+    border-radius: 14px;
+    transition: .3s;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 0 25px rgba(56,189,248,0.2);
+}
+
+.card-buttons {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+}
+
+/* ===== Skills ===== */
+.skills {
+    margin-top: 20px;
+}
+
+.skills span {
+    display: inline-block;
+    background: #020617;
+    padding: 8px 14px;
+    border-radius: 20px;
+    margin: 6px;
+    font-size: 14px;
+}
+
+/* ===== Vídeos ===== */
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.video-grid iframe {
+    width: 100%;
+    height: 250px;
+    border-radius: 12px;
+}
+
+/* ===== Formulário ===== */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+input, textarea {
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+}
+
+/* ===== Social ===== */
+.social {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.social a {
+    margin: 10px;
+    color: var(--accent2);
+    text-decoration: none;
+}
+
+/* ===== Footer ===== */
+footer {
+    text-align: center;
+    padding: 30px;
+    opacity: 0.6;
+}
+
+/* ===== Animação Reveal ===== */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: .8s;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ===== Responsivo ===== */
+@media (max-width: 800px) {
+
+    .grid-3 {
+        grid-template-columns: 1fr;
+    }
+
+    .video-grid {
+        grid-template-columns: 1fr;
+    }
+
+    nav {
+        position: absolute;
+        right: 0;
+        top: 70px;
+        background: #020617;
+        display: none;
+        flex-direction: column;
+        width: 200px;
+        padding: 20px;
+    }
+
+    nav.show {
+        display: flex;
+    }
+
+    .hamburger {
+        display: block;
+    }
+}
