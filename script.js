@@ -1,75 +1,73 @@
-// ================= MENU MOBILE =================
-// Seleciona botão e menu
+// ===== MENU MOBILE =====
 const hamburger = document.getElementById("hamburger");
 const menu = document.getElementById("menu");
 
-// Ao clicar abre/fecha menu
-hamburger.addEventListener("click", () => {
-    menu.classList.toggle("show");
+hamburger.onclick = () => menu.classList.toggle("show");
+
+
+// ===== SCROLL SUAVE =====
+document.querySelectorAll("nav a").forEach(link=>{
+ link.onclick = e=>{
+  e.preventDefault();
+  document.querySelector(link.getAttribute("href"))
+  .scrollIntoView({behavior:"smooth"});
+  menu.classList.remove("show");
+ };
 });
 
 
-// ================= SCROLL SUAVE =================
-// Faz links do menu rolarem suave
-document.querySelectorAll('nav a').forEach(link => {
-    link.addEventListener('click', function(e) {
-        e.preventDefault();
-
-        const target = document.querySelector(this.getAttribute('href'));
-        target.scrollIntoView({
-            behavior: "smooth"
-        });
-
-        // Fecha menu no mobile após clique
-        menu.classList.remove("show");
-    });
-});
-
-
-// ================= ANIMAÇÃO AO APARECER =================
+// ===== REVEAL ANIMATION =====
 const reveals = document.querySelectorAll(".reveal");
 
-function revealOnScroll() {
-    const windowHeight = window.innerHeight;
+function reveal(){
+ const h = window.innerHeight;
+ reveals.forEach(el=>{
+  if(el.getBoundingClientRect().top < h-80){
+    el.classList.add("active");
+  }
+ });
+}
+window.addEventListener("scroll", reveal);
+reveal();
 
-    reveals.forEach(el => {
-        const top = el.getBoundingClientRect().top;
 
-        if (top < windowHeight - 100) {
-            el.classList.add("active");
-        }
-    });
+// ===== FORM VALIDATION =====
+document.getElementById("contactForm").onsubmit = e=>{
+ e.preventDefault();
+
+ const nome = nomeEl.value.trim();
+ const email = emailEl.value.trim();
+ const msg = mensagemEl.value.trim();
+
+ if(nome.length < 3) return alert("Nome curto");
+ if(!email.includes("@")) return alert("Email inválido");
+ if(msg.length < 5) return alert("Mensagem curta");
+
+ alert("Mensagem enviada!");
+ e.target.reset();
+};
+
+const nomeEl = document.getElementById("nome");
+const emailEl = document.getElementById("email");
+const mensagemEl = document.getElementById("mensagem");
+
+
+// ===== SISTEMA DE TEMA =====
+const select = document.getElementById("themeSelect");
+
+function applyTheme(mode){
+ if(mode === "auto"){
+  const dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  document.documentElement.setAttribute("data-theme", dark ? "dark":"light");
+ } else {
+  document.documentElement.setAttribute("data-theme", mode);
+ }
+ localStorage.setItem("theme", mode);
 }
 
-window.addEventListener("scroll", revealOnScroll);
-revealOnScroll();
+select.onchange = () => applyTheme(select.value);
 
-
-// ================= VALIDAÇÃO FORMULÁRIO =================
-document.getElementById("contactForm")
-.addEventListener("submit", function(e) {
-
-    e.preventDefault();
-
-    const nome = document.getElementById("nome").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const msg = document.getElementById("mensagem").value.trim();
-
-    if (nome.length < 3) {
-        alert("Nome muito curto");
-        return;
-    }
-
-    if (!email.includes("@")) {
-        alert("Email inválido");
-        return;
-    }
-
-    if (msg.length < 5) {
-        alert("Mensagem muito curta");
-        return;
-    }
-
-    alert("Mensagem enviada com sucesso!");
-    this.reset();
-});
+// carregar salvo
+const saved = localStorage.getItem("theme") || "auto";
+select.value = saved;
+applyTheme(saved);
